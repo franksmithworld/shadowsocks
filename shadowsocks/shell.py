@@ -23,9 +23,11 @@ import json
 import sys
 import getopt
 import logging
+
+import subprocess
+
 from shadowsocks.common import to_bytes, to_str, IPNetwork
 from shadowsocks import encrypt
-
 
 VERBOSE_LEVEL = 5
 
@@ -151,6 +153,8 @@ def get_config(is_local):
             with open(config_path, 'rb') as f:
                 try:
                     config = parse_json_in_str(f.read().decode('utf8'))
+                    if 'server' not in config and 'servers' in config:
+                        config.update(config['servers'][0])
                 except ValueError as e:
                     logging.error('found an error in config.json: %s',
                                   e.message)
@@ -373,3 +377,15 @@ def _decode_dict(data):
 def parse_json_in_str(data):
     # parse json and convert everything from unicode to str
     return json.loads(data, object_hook=_decode_dict)
+
+
+def set_system_proxy(mode):
+    sysconf_path = os.path.join(os.path.dirname(__file__), 'shadowsocks_sysconf')
+    output = subprocess.check_output(sysconf_path + ' ' + mode, stdin=subprocess.PIPE, shell=True)
+    print(output)
+
+
+def run_pac_server():
+    curent_dir = os.path.join(os.path.dirname(__file__), 'pac')
+    p = subprocess.Popen('python -m SimpleHTTPServer 8090', shell=True, cwd=curent_dir)
+    print(p.pid)

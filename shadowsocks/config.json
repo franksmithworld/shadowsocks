@@ -1,0 +1,25 @@
+{
+  "servers": [
+    {
+      "server": "45.32.77.42",
+      "server_port": 8989,
+      "password": "songfeifeiq1w2e3r4",
+      "method": "aes-256-cfb",
+      "remarks": ""
+    },
+    {
+      "server": "98.126.0.174",
+      "server_port": 8388,
+      "password": "tianma8",
+      "method": "aes-256-cfb",
+      "remarks": "美国"
+    },
+    {
+      "server": "107.170.218.244",
+      "server_port": 10000,
+      "password": "Drmk19630811",
+      "method": "aes-256-cfb",
+      "remarks": "大圣"
+    }
+  ]
+}

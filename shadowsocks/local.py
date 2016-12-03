@@ -19,6 +19,8 @@ from __future__ import absolute_import, division, print_function, \
     with_statement
 
 import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 import os
 import logging
 import signal
@@ -52,6 +54,9 @@ def main():
         tcp_server.add_to_loop(loop)
         udp_server.add_to_loop(loop)
 
+        shell.set_system_proxy('auto')
+        shell.run_pac_server()
+
         def handler(signum, _):
             logging.warn('received SIGQUIT, doing graceful shutting down..')
             tcp_server.close(next_tick=True)
@@ -59,6 +64,8 @@ def main():
         signal.signal(getattr(signal, 'SIGQUIT', signal.SIGTERM), handler)
 
         def int_handler(signum, _):
+            logging.info('shutting downing...')
+            shell.set_system_proxy('off')
             sys.exit(1)
         signal.signal(signal.SIGINT, int_handler)
 

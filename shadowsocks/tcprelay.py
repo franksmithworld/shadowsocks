@@ -631,6 +631,7 @@ class TCPRelayHandler(object):
         if sock == self._remote_sock:
             if event & eventloop.POLL_ERR:
                 self._on_remote_error()
+                # set failed
                 if self._stage == STAGE_DESTROYED:
                     return
             if event & (eventloop.POLL_IN | eventloop.POLL_HUP):
