@@ -154,7 +154,8 @@ def get_config(is_local):
                 try:
                     config = parse_json_in_str(f.read().decode('utf8'))
                     if 'server' not in config and 'servers' in config:
-                        config.update(config['servers'][0])
+                        config.update(config['servers'][-1])
+                    print('using server: %s', config['server'])
                 except ValueError as e:
                     logging.error('found an error in config.json: %s',
                                   e.message)

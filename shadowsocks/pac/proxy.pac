@@ -4,7 +4,11 @@
 var proxy = "SOCKS5 127.0.0.1:1080; SOCKS 127.0.0.1:1080; DIRECT;";
 
 var rules = [
+  "||crashlytics.io",
+  "||wp.com",
   "||fabric.io",
+  "api-dash.fabric.io",
+  "||trackjs.com",
   "developer.apple.com",
   "||aws.amazon.com",
   "icaimall.devsmart.io",

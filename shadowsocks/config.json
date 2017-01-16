@@ -20,6 +20,13 @@
       "password": "Drmk19630811",
       "method": "aes-256-cfb",
       "remarks": "大圣"
+    },
+    {
+      "server": "47.90.76.184",
+      "server_port": 8888,
+      "password": "Drmk19630811",
+      "method": "aes-256-cfb",
+      "remarks": "hk"
     }
   ]
 }
